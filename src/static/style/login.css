@@ -1,0 +1,39 @@
+*{
+    font-size: x-large;
+}
+.incorrect{
+    background-color: #e67777;
+    color: #850505;
+}
+.correct{
+    background-color: #4dc87f;
+    color: #104010;
+}
+table{
+    width: 450px;
+    margin: 0 auto;
+}
+tr{
+    width: 100%;
+}
+td{
+    width: 50%;
+    border: black 1px solid;
+}
+td *{
+    margin: 2px auto;
+
+}
+input{
+    width: 90%;
+}
+button{
+    width: 100%;
+    text-autospace: ideograph-alpha;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}

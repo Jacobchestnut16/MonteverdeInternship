@@ -1,0 +1,6 @@
+Day 1 was setting up a docker environment and starting to design login and sign up pages:
+    - index.php will load first when uid is not set it will go to login.html
+    - login.html uses action/login.php to verify the user and password
+    - signup.html requires username email phone# password(X2 for verification)
+    - in docker it has php, apache, sql
+    - day 2 will be me setting up sql and index.php

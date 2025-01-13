@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  database:
+    image: mysql:latest
+    container_name: test_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mcshedual
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - test_network
+
+  php:
+    build:
+      context: .  # Path to the directory containing the Dockerfile
+    container_name: php_container  # Name for the PHP container
+    ports:
+      - "8080:80"  # Map port 8080 to the container's port 80
+    volumes:
+      - ./src:/var/www/html  # Mount your local `src` folder to the web directory
+      - ./php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - database
+    networks:
+      - test_network
+
+  web:
+    build: .
+    container_name: test_web
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+      - php
+    networks:
+      - test_network
+
+volumes:
+  db_data:
+
+networks:
+  test_network:

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="static/style/login.css">
+</head>
+<body>
+
+<form action="action/login.php" method="post">
+    <table>
+        <tr>
+            <td>
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" required onchange="verifyCompletion()">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required onchange="verifyCompletion()">
+            </td>
+            <td>
+                <label for="viewPass">View Password</label>
+                <input type="checkbox" name="viewPass" id="viewPass" onchange="viewPassword()">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="hide" type="submit" id="submit">Login</button></td>
+        </tr>
+    </table>
+</form>
+
+<script>
+
+    function viewPassword() {
+        if (document.getElementById('viewPass').checked)
+            document.getElementById('password').type = "text";
+        else
+            document.getElementById('password').type = "password";
+
+    }
+
+    function verifyCompletion() {
+        if (document.getElementById('password').value != null && document.getElementById('username').value != null){
+            document.getElementById('submit').className = 'show';
+        } else{
+            document.getElementById('submit').className = 'hide';
+        }
+    }
+
+</script>
+
+</body>
+</html>
