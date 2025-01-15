@@ -1,0 +1,3 @@
+For when i get to it since this is a web app I will need to ensure i have reliable ways to notify the users they
+have an upcoming shift. I think I will use https://firebase.google.com/docs/cloud-messaging/js/client as my source
+for web notification, and may use email based notifications as well.

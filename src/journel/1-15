@@ -1,0 +1,19 @@
+Today I spent most of the day trying to set up a database for the project. I had a hard time visualizing it so I spent
+way too long on it. But I drew it out in DIA and was able to get a foundation for how the database can work.
+
+    - Events the events the owner has throughout the year
+    - Users login and user information
+    - EventType allows the owner to have a reusable list of events // will include color for when the calendar is created
+    - EventLocation allows the owner to have a reusable list of events // will include color
+    - eventUsers was created for the many to many relation ship between events and users which allows the company to
+        assign users to a certain shift (the ultimate goal)
+
+    missing:
+    - UserEventsRequests allows users to request to work an event
+    - UserEventDrop allows the users to notify the company someone cannot work an event
+    - UserCannotBeScheduledDates The dates that users cannot be scheduled for
+    - UserTimeClock allows teh user to clock in and out when they are working
+    - Events | features notes, foreign keys, schedule/itinerary
+    - EventLocation | features color
+    - EventTypes | features color
+    - UsersPayRate | not official and undecided by the company | payRate, userID
