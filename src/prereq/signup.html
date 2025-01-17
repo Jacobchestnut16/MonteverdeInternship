@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
-    <link rel="stylesheet" href="static/style/login.css">
+    <link rel="stylesheet" href="../static/style/login.css">
 </head>
 <body>
 
-<form action="action/login.php" method="post">
+<form action="../action" method="post">
         <table>
+            <tr>
+                <td>
+                    <label for="firstname">First name:</label>
+                    <input type="text" name="firstname" id="firstname" required onchange="verifyCompletion()">
+                </td>
+                <td>
+                    <label for="lastname">Last name: </label>
+                    <input type="text" name="lastname" id="lastname" required onchange="verifyCompletion()">
+                </td>
+            </tr>
             <tr>
                 <td>
                     <label for="username">Username:</label>
@@ -24,10 +34,6 @@
                     <label for="phone">Phone number:</label>
                     <input type="tel" name="phone" id="phone" required onchange="verifyCompletion()">
                 </td>
-                <td>
-                    <label for="signupCode">Signup code:</label>
-                    <input type="password" name="signupCode" id="signupCode" required onchange="verifyCompletion()">
-                </td>
             </tr>
             <tr>
                 <td>
@@ -41,6 +47,7 @@
             </tr>
             <tr>
                 <td>
+                    <input type="hidden" name="privilege" value="0">
                     <button id="submit" class="hide" type="submit">Login</button>
                 </td>
             </tr>
@@ -63,7 +70,7 @@
     function verifyCompletion() {
         if (document.getElementById('password').value != null && document.getElementById('username').value != null
             && document.getElementById('phone') != null && document.getElementById('email') != null
-            && document.getElementById('verifyPassword') != null && document.getElementById('signupCode') != null && document.getElementById('password').className === 'correct'
+            && document.getElementById('verifyPassword') != null && document.getElementById('firstname') != null && document.getElementById('lastname') != null && document.getElementById('password').className === 'correct'
         ){
             document.getElementById('submit').className = 'show';
         } else{

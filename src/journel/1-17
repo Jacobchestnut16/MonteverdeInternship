@@ -1,0 +1,10 @@
+I have completed signup register and for the most part login.
+I will add more logic to index.php when I get to logged in users and how limited the site will look for each
+privilege and for users that aren't logged in yet.
+I added logic for users to be requried a signup code. One generic code that the owner can give to everyone so that
+they can signup on their own, and a generative code that is based on the users id so that the user can finish setting
+up their account on their own. this code would also help when the user forgets their password it can get emailed to them
+so that they can reset their password when needed.
+
+next goals are to start working at the calender and adding data to the database such as event locations, event types
+followed by logic for users to request shifts, and for the owner to set up schedules

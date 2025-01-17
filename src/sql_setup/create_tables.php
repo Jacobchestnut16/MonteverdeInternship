@@ -19,6 +19,10 @@ $sql = "CREATE DATABASE IF NOT EXISTS $dbname;
         password VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL,
         phone VARCHAR(15) NOT NULL),
+        firstname VARCHAR(100) NOT NULL,
+        lastname VARCHAR(100) NOT NULL,
+        privilege int NOT NULL,
+        extendedView int NOT NULL,
         PRIMARY KEY (id);
         
         CREATE TABLE IF NOT EXISTS EventLocation (

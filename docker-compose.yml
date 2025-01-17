@@ -3,7 +3,7 @@ version: '3.8'
 services:
   database:
     image: mysql:latest
-    container_name: test_db
+    container_name: internship
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mcshedual
@@ -19,7 +19,7 @@ services:
   php:
     build:
       context: .  # Path to the directory containing the Dockerfile
-    container_name: php_container  # Name for the PHP container
+    container_name: php_container_inter  # Name for the PHP container
     ports:
       - "8080:80"  # Map port 8080 to the container's port 80
     volumes:
@@ -32,7 +32,7 @@ services:
 
   web:
     build: .
-    container_name: test_web
+    container_name: test_web_inter
     ports:
       - "8000:8000"
     depends_on:

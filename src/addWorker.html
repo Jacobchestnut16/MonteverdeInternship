@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Worker</title>
+    <link rel="stylesheet" href="static/style/login.css">
+    <link rel="stylesheet" href="static/style/hoverBox.css">
+</head>
+<body>
+<h1>
+    Add New Worker
+</h1>
+<form action="action/addWorker.php" method="post">
+    <table>
+        <tr>
+            <td><label for="firstname">Firstname</label><input type="text" name="firstname" id="firstname"></td>
+            <td><label for="lastname">Lastname</label><input type="text" name="lastname" id="lastname"></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="privilege">Select user privilege:</label>
+                <div style="position: relative;">
+                    <select name="privilege" id="privilege" required>
+                        <option value="">--Select privilege--</option>
+                        <option value="0" title="Can see and manipulate their own schedule and hours">Crew</option>
+                        <option value="1" title="Can see and manipulate everyone's schedule and hours">Management</option>
+                        <option value="2" title="Can login as any user full access, but will only login as their own user in crew mode">Admin</option>
+                    </select>
+                    <div class="tooltip" id="tooltip"></div>
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Add User</button>            </td>
+        </tr>
+    </table>
+    <comment>The only thing required is the user privilege, you can also let people signup on their own with the code 75214831</comment>
+</form>
+
+</body>
+</html>
