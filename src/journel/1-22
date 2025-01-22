@@ -1,0 +1,5 @@
+i updated index to display the navigation based on user privilege. And fixed a few bugs to begin testing.
+I also added new files not filled in yet, but these are the main pages that every use will use, and some extra pages
+that are meant for the own such as seeing ever users time clock and being able to filter unpaid events and fill out
+their pay, possibly their pay rate.
+

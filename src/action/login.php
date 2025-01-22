@@ -18,23 +18,27 @@ try{
     if ($result->num_rows <= 0) {
         echo "Invalid username or password";
         echo "<br>";
-        echo "<iframe src='../login.html'></iframe>";
+        include '../login.html'; //uses the base file to display most of the contents
+
     }
     $encrypted_password = sha1($_POST["password"]);
     if ($row['password'] == $encrypted_password) {
         session_start();
         $_SESSION['uID'] = $row['uID'];
-        header('Location: index.php/?uid='.$row['uID']);
+        header('Location: /?uid='.$row['uID']);
         exit();
 
     }else{
         echo "Invalid username or password";
         echo "<br>";
-        echo "<iframe src='../login.html'></iframe>";
+        include '../login.html'; //uses the base file to display most of the contents
+
     }
 }catch (Exception $e){
     echo "Error: " . $e->getMessage();
     echo "<br>";
-    echo "<iframe src='../login.html'></iframe>";
+    include '../login.html'; //uses the base file to display most of the contents
+
+
 }
 
