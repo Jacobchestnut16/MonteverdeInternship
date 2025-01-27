@@ -53,3 +53,7 @@ $sql = "CREATE DATABASE IF NOT EXISTS $dbname;
         FOREIGN KEY (eventID) REFERENCES events (id),
         FOREIGN KEY (userID) REFERENCES users (id));
         ";
+?>
+<form action="">
+
+</form>
