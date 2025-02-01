@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Monteverde Clocks</title>
     <link rel="stylesheet" href="static/style/dropdown.css">
+    <link rel="stylesheet" href="static/style/index.css">
 </head>
 <body>
 <?php
@@ -24,7 +25,7 @@ if (isset($_GET['navWindow'])) {
 }
 
 ?>
-<table>
+<table class="nav">
     <tr>
         <?php if (isset($_GET['uc'])):?>
             <?php
@@ -111,7 +112,7 @@ if (isset($_GET['navWindow'])) {
                                   <table>
                                       <tr><td><a href='/?navWindow=nav/Schedule.html&uc=" . $_GET['uc'] . "'>Profile</a></td></tr>
                                       <tr><td><a href='/?navWindow=nav/Calendar.html&uc=" . $_GET['uc'] . "'>Reset Passord</a></td></tr>
-                                      <tr><td><a href='/?navWindow=nav/RequestOff.html&uc=" . $_GET['uc'] . "'>Logout</a></td></tr>
+                                      <tr><td><a href='/?navWindow=nav/'>Logout</a></td></tr>
                                   </table>
                               </div>
                           </div>
@@ -129,6 +130,6 @@ if (isset($_GET['navWindow'])) {
     </tr>
 </table>
 
-<iframe src="<?= $navWindow ?>" frameborder="1" width="100%" height="90%"></iframe>
+<iframe src="<?= $navWindow ?>" frameborder="1"></iframe>
 </body>
 </html>

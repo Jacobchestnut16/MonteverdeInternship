@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <td>
-                <button id="submit" class="hide" type="submit">Login</button>
+                <button id="submit" class="hide" type="submit">Register</button>
             </td>
         </tr>
     </table>

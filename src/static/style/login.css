@@ -18,7 +18,6 @@ tr{
 }
 td{
     width: 50%;
-    border: black 1px solid;
 }
 td *{
     margin: 2px auto;

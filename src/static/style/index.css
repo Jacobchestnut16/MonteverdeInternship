@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 87%;
+    border: black 1px solid;
+    margin: 15px auto 0;
+    height: 100%;
+    background: #355546;
+    overflow: hidden;
+}
+iframe{
+    width: 100%;
+    margin: 0 auto;
+    height: 800px;
+    background: rgba(234, 200, 135, 0.71);
+    border: none;
+}
+.nav{
+    width: 100%;
+    background: rgb(142, 109, 11);
+}
+.nav tr{
+    width: 100%;
+}
+.nav tr td{
+    width: 66px;
+    box-shadow: rgba(239, 187, 99, 0.56) 2px 2px 11px;
+    padding: 3px;
+}
+.nav tr td div .dropdown tr td{
+    width: 150px;
+    box-shadow: rgba(211,214,213,.33) 2px 2px 5px;
+    padding: 3px;
+}
