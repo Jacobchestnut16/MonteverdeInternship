@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 90%;
+    margin: 0 auto;
+}
+.card{
+    border: 1px solid black;
+    height: 250px;
+    width: 220px;
+    margin: 7px;
+}
+h4{
+    font-size: medium;
+}
+table{
+    width: 100%;
+}
+.head{
+    background: rgba(0,0,0,.15);
+    height: 55px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+.head *{
+    display: flex;
+}
+.head h4{
+    position: relative;
+    top: 27px;
+}
+img{
+    width: 50px;
+    height: 50px;
+    border: 1px solid;
+    border-radius: 50px;
+}
+div{
+    margin: 0 auto;
+}
+div div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.card{
+    position: relative;
+}
+.dropdown{
+    display: none;
+    position: absolute;
+    z-index: 10;
+    width: 150px;
+    background-color: rgba(75,75,75,.94);
+
+}
+.card:hover .dropdown{
+    display: block;
+}

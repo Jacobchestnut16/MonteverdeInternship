@@ -1,3 +1,4 @@
+<h1>Event List Editor</h1>
 <form action="../../action/addEvent.php">
     <label for="event">Event: </label>
     <input type="text" id="event" name="event" required>

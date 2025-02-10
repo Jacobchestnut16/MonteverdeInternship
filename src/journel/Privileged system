@@ -1,0 +1,30 @@
+Systems:
+0 - view only ~ database control
+1 - view user list ~ profile control
+2 - Add data ~ database control
+3 - Modify data ~ database control
+4 - edit user profile ~ profile control
+5 - Delete data ~ database control
+6 - edit all users profiles ~ profile control
+7 - Delete User Profile ~ profile control
+8 - Delete all users profiles ~ profile control
+
+Admins:
+9 - Self Admin ~ admin | 1,4,7 | 0,2, ~Sometimes 3
+10 - Crew's ~ admin | 1,4,~Sometimes 6{9 Users},7 | 0,2, ~sometimes 3
+11 - Management's ~ admin | 1,4,6{>10 Users},7,8{>10 Users} | 0,2,3, ~Sometimes 5
+12 - Domain-Management's ~ admin | 1,4,6{>11 Users},7,8{>11 Users} | 0,2,3,5
+13 - Domain's Admin ~ admin | 1,4,6{>12 Users},7,8{>11 Users, 12 --User--} | 0,2,3,5
+
+Unprivileged:
+404 - signed out ~ unprivileged | |
+
+
+database is global
+user is in database but has more restrictions
+
+level - {name} ~ [super, admin, unprivileged] | user control {defined control over level users} | database control
+
+singular self profile, plural global profiles, x ~sometimes a privilege in some cases predefined
+
+if user has privilege x < y they cannot control y

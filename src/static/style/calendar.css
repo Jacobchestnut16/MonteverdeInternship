@@ -1,0 +1,111 @@
+*{
+    font-size: 105%;
+}
+header *{
+    color: black;
+}
+.currentDay{
+    border-top: red 5px solid;
+    background: rgb(218, 61, 61,.25);
+}
+.surroundingMonth{
+    color: rgba(0,0,0,.47);
+}
+
+.dropdown{
+    top: 23px;
+}
+
+table{
+    margin: 0 auto;
+}
+
+table tr{
+    width: 100%;
+}
+table tr td{
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    font-size: 90%;
+}
+
+.weekDays td{
+    text-align: center;
+    border: none;
+}
+
+.days tr{
+    height: 65px;
+}
+.days tr td{
+    height: 100%;
+    position: relative;
+}
+.date{
+    position: absolute;
+    top: -17px;
+    padding: 4px;
+}
+.currentDay .date{
+    position: absolute;
+    top: -22px;
+    padding: 4px;
+}
+.week tr{
+    height: 195px;
+    border: orange 2px solid;
+}
+.week tr td{
+    height: 100%;
+    position: relative;
+}
+
+
+.monthHeader{
+    width: 200px;
+}
+header table tr td{
+    border: none;
+    text-align: center;
+}
+
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
+
+a{
+    color: #104010;
+}
+.dropdown-container:hover .dropdown{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: content;
+}
+.dropdown a{
+    width: 30%;
+    font-size: large;
+}
+.dropdown a:hover{
+    color: #4dc87f;
+}
+
+.event-container{
+    position: relative;
+    top: 6px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.event{
+    margin: 5px;
+    background: orange;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+}

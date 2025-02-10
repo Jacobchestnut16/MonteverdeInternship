@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 
 $sql = "CREATE DATABASE IF NOT EXISTS $dbname;
 
-        CREATE TABLE IF NOT EXISTS users (
+        CREATE TABLE IF NOT EXISTS Users (
         id INT NOT NULL AUTO_INCREMENT,
         username VARCHAR(100) NOT NULL,
         password VARCHAR(100) NOT NULL,
@@ -22,7 +22,6 @@ $sql = "CREATE DATABASE IF NOT EXISTS $dbname;
         firstname VARCHAR(100) NOT NULL,
         lastname VARCHAR(100) NOT NULL,
         privilege int NOT NULL,
-        extendedView int NOT NULL,
         PRIMARY KEY (id));
         
         CREATE TABLE IF NOT EXISTS EventLocation (
@@ -36,12 +35,13 @@ $sql = "CREATE DATABASE IF NOT EXISTS $dbname;
         eventType varchar(100) NOT NULL,
         PRIMARY KEY (id));
         
-        CREATE TABLE IF NOT EXISTS events (
+        CREATE TABLE IF NOT EXISTS Events (
         id INT NOT NULL AUTO_INCREMENT,
-        name VARCHAR(100) NOT NULL,
+        name VARCHAR(100),
         date DATETIME NOT NULL,
         eventTypeID int NOT NULL,
-        locationID int NOT NULL),
+        locationID int NOT NULL,
+        notes VARCHAR(899),
         PRIMARY KEY (id),
         FOREIGN KEY (eventTypeID) REFERENCES EventType (id),
         FOREIGN KEY (locationID) REFERENCES EventLocation (id));
@@ -54,7 +54,14 @@ $sql = "CREATE DATABASE IF NOT EXISTS $dbname;
         FOREIGN KEY (eventID) REFERENCES events (id),
         FOREIGN KEY (userID) REFERENCES users (id));
         ";
-?>
-<form action="">
 
-</form>
+if ($conn->multi_query($sql) === TRUE) {
+    echo "Database tables created successfully";
+    include 'AdminSetup.html';
+} else{
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+?>
+
+
+

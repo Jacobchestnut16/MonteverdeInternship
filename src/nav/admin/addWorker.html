@@ -13,8 +13,8 @@
 <form action="../../action/addWorker.php" method="post">
     <table>
         <tr>
-            <td><label for="firstname">Firstname</label><input type="text" name="firstname" id="firstname"></td>
-            <td><label for="lastname">Lastname</label><input type="text" name="lastname" id="lastname"></td>
+            <td><label for="firstname">First name (optional)</label><input type="text" name="firstname" id="firstname"></td>
+            <td><label for="lastname">Last name (optional)</label><input type="text" name="lastname" id="lastname"></td>
         </tr>
         <tr>
             <td>
@@ -22,9 +22,11 @@
                 <div style="position: relative;">
                     <select name="privilege" id="privilege" required>
                         <option value="">--Select privilege--</option>
-                        <option value="0" title="Can see and manipulate their own schedule and hours">Crew</option>
-                        <option value="1" title="Can see and manipulate everyone's schedule and hours">Management</option>
-                        <option value="2" title="Can login as any user full access, but will only login as their own user in crew mode">Admin</option>
+                        <option value="9" title="Normal user has permission 9 or self admin">Crew</option>
+                        <option value="10" title="Upgraded normal user permission 10 can help other users reset their password">Crew-Management</option>
+                        <option value="11" title="Permission 11 Can remove anyone below them or edit their profile, reset passwords, has Event control (adding and editing)">Management</option>
+                        <option value="12" title="Permission 12 Can remove anyone below them or edit their profile, reset passwords, has Event control (full control)">Domain-Management</option>
+                        <option value="13" title="Permission 13 Full control of the domain and database">Domain's Admin</option>
                     </select>
                     <div class="tooltip" id="tooltip"></div>
                 </div>
@@ -36,7 +38,7 @@
                 <button type="submit">Add User</button>            </td>
         </tr>
     </table>
-    <comment>The only thing required is the user privilege, you can also let people signup on their own with the code 75214831</comment>
+    <comment>You can also let people signup on their own with the store code 75214831</comment>
 </form>
 
 </body>

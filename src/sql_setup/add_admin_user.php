@@ -16,7 +16,7 @@ $password  = $_POST["password"];
 $phone = $_POST["phone"];
 $fname = $_POST["firstname"];
 $lname = $_POST["lastname"];
-$privilege = 1;
+$privilege = 13;
 $extendedView = 0;
 
 $sql = "INSERT INTO users (username, password, email, phone, firstname, lastname, privilege, extendedView)

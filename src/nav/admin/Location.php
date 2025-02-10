@@ -1,6 +1,7 @@
-<form action="../../action/addEvent.php">
-    <label for="event">Location: </label>
-    <input type="text" id="event" name="event" required>
+<h1>Location List Editor</h1>
+<form action="../../action/addLocation.php" method="post">
+    <label for="eventType">Location: </label>
+    <input type="text" id="eventType" name="eventType" required>
     <label for="eventColor">Color: </label>
     <input type="color" name="eventColor" id="eventColor">
     <button type="submit">Add</button>

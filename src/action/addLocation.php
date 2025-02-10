@@ -10,6 +10,7 @@ if ($conn->connect_error) {
     echo "Connection failed: " . $conn->connect_error;
 }
 
+
 $query = "INSERT INTO EventLocation (location, color) values ('".$_POST["eventType"]."', '".$_POST['eventColor']."')";
 
 if ($conn->query($query) === TRUE) {

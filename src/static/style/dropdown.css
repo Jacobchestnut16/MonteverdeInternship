@@ -1,3 +1,6 @@
+*{
+    font-size: 105%;
+}
 .dropdown-container{
     position: relative;
 }
@@ -14,4 +17,5 @@ display: block;
 a{
     color: #4dc87f;
     text-decoration: none;
+
 }
