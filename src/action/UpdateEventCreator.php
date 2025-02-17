@@ -7,6 +7,8 @@ $loc = $_POST['loc'];
 $env = $_POST['evn'];
 $notes = $_POST['notes'];
 $requests = $_POST['requests'];
+$workersAdded = $_POST['workersAdded'];
+$id = $_POST['id'];
 
 //Check if elements are in db
 $servername = "database"; //will change after new env setup
@@ -48,7 +50,7 @@ if ($result = $conn->query($query)) {
     }
 
 } else {
-        echo "<p>Location Table Load .............. FAIL</p>";
+    echo "<p>Location Table Load .............. FAIL</p>";
 }
 //elseif event isn't there go to ../admin/pseudoEvent.php/?env=$env&loc=$loc
 $query = "SELECT id FROM EventType where eventType='$env'";
@@ -78,10 +80,12 @@ if ($result = $conn->query($query)) {
 //else add the event to the database
 //include calendar.php/?month=$month
 
-$query = "INSERT INTO Events (name, date, eventTypeID, locationID, notes, workersRequest, workersAdded) VALUES ('$name', '$datetime', $eventID, $locationID, '$notes', $requests, 0);";
+$query = "UPDATE Events set name = '$name', date = '$datetime', eventTypeID = $eventID,
+                  locationID = $locationID, notes = '$notes', workersRequest = $requests, workersAdded = $workersAdded
+                    where id = $id;";
 if ($result = $conn->query($query)) {
-    echo "<h1>Event Created Successfully</h1>";
+    echo "<a href='/nav/ViewEvent.php/?id=".$id."'>Back to View Event</a>";
 }else{
-    echo "<h1>Event Created Failed: " . $conn->error . "</h1>";
+    echo "<h1>Event Update Failed: " . $conn->error . "</h1>";
 }
 

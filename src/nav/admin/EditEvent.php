@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Monteverde Clocks</title>
+    <link rel="stylesheet" href="/static/style/edit.css">
     <link rel="stylesheet" href="/static/style/dropdown.css">
     <link rel="stylesheet" href="/static/style/creator.css">
 </head>
@@ -21,20 +22,35 @@ if ($conn->connect_error) {
     echo "Connection failed: " . $conn->connect_error;
 }
 
+$query = "SELECT Events.name as 'name', Events.notes as 'notes', Events.date as 'date', Events.workersRequest as 'workersRequest', Events.workersAdded as 'workersAdded',
+          EventLocation.location as 'location', EventType.eventType as 'eventType' FROM Events join EventLocation on EventLocation.id = Events.locationID
+         join EventType on EventType.id = Events.eventTypeID WHERE Events.id = " . $_GET["id"] . ";";
+$result = $conn->query($query);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $name = $row["name"];
+    $notes = $row["notes"];
+    $date = $row["date"];
+    $requests = $row["workersRequest"];
+    $workersAdded = $row["workersAdded"];
+    $location = $row["location"];
+    $eventType = $row["eventType"];
+}
+
 ?>
 
-<form action="../../action/EventCreator.php" method="post">
+<form action="/action/UpdateEventCreator.php" method="post">
     <table>
         <tr>
             <td>
                 <label for="name">Name</label>
                 <br>
-                <input type="text" name="name" id="name">
+                <input type="text" name="name" id="name" value="<?= $name ?>">
             </td>
             <td>
                 <label for="td">Time</label>
                 <br>
-                <input type="datetime-local" name="dt" id="dt" required>
+                <input type="datetime-local" name="dt" id="dt"  value="<?= $date ?>" required>
             </td>
         </tr>
         <tr>
@@ -42,7 +58,7 @@ if ($conn->connect_error) {
                 <label for="loc">Location</label>
                 <br>
                 <div class="dropdown-container">
-                    <input type="text" name="loc" id="loc" required>
+                    <input type="text" name="loc" id="loc" value="<?= $location ?>" required>
                     <div class="dropdown">
                         <table>
                             <?php
@@ -71,7 +87,7 @@ if ($conn->connect_error) {
                 <label for="evn">Event Type</label>
                 <br>
                 <div class="dropdown-container">
-                    <input type="text" name="evn" id="evn" required>
+                    <input type="text" name="evn" id="evn" value="<?= $eventType ?>" required>
                     <div class="dropdown">
                         <table>
                             <?php
@@ -103,19 +119,21 @@ if ($conn->connect_error) {
             <td>
                 <label for="requests">Open Request Max</label>
                 <br>
-                <input type="number" name="requests" id="requests">
+                <input type="number" name="requests" id="requests" value="<?= $requests ?>">
             </td>
         </tr>
         <tr>
             <td>
                 <label for="notes">Notes</label>
                 <br>
-                <input type="text" name="notes" id="notes">
+                <input type="text" name="notes" id="notes"  value="<?= $notes ?>">
             </td>
         </tr>
         <tr>
             <td>
-                <button type="submit">Add Event</button>
+                <input type="hidden" name="id" id="id"  value="<?= $_GET['id'] ?>">
+                <input type="hidden" name="workersAdded" id="workersAdded"  value="<?= $workersAdded ?>">
+                <button type="submit">Save Event</button>
             </td>
         </tr>
     </table>

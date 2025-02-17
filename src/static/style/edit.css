@@ -1,0 +1,19 @@
+
+*{
+    font-size: 102%;
+    font-family: Calibri;
+    font-weight: bold;
+}
+h1{
+    font-size: 160%;
+}
+table{
+    margin: 0 auto;
+}
+label{
+    text-shadow: black 0px 0px 2px;
+    color: #b36905;
+}
+.dropdown *{
+    text-shadow: black 0px 0px 2px;
+}

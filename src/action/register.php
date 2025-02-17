@@ -17,16 +17,17 @@ try{
 
         $firstname = $_POST["firstname"];
         $lastname = $_POST["lastname"];
-        $privilege = $_POST["privilege"];
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        $password = sha1($password);
+        $email = $_POST["email"];
+        $phone = $_POST["phone"];
+        $id = $_POST["id"];
 
-        $sql = "INSERT INTO Users (username, password, email, phone, firstname, lastname, privilege) VALUES ('','','','','$firstname','$lastname',$privilege)";
-        if ($conn->query($sql) === TRUE) {
-            echo "User created successfully";
-            $findUserID = "SELECT id FROM Users order by id desc limit 1";
-            $result = $conn->query($findUserID);
-            $row = $result->fetch_assoc();
-            $id = $row["id"];
-            echo "Sign up code is: " . generateSignupCode($id) . "<br><comment>Ensure you give this code to the new worker!</comment>";
+        $sql = "UPDATE Users set username='$username', password='$password', email='$email', phone='$phone', firstname='$firstname', lastname='$lastname' where id = '$id'";
+
+        if ($conn->query($sql)) {
+            echo "User has been registered successfully! Please login.";
         }
     }
 

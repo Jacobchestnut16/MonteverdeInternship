@@ -1,3 +1,7 @@
+<?php
+session_start();
+$uid = $_SESSION['uid'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +18,46 @@
     </tr>
 </tabel>
 <?php
+$servername = "database"; //will change after new env setup
+$username = "user";
+$password = "pass";
+$dbname = "mcshedual";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    echo "Connection failed: " . $conn->connect_error;
+}
+
+$eventDate = [];
+$eventLocationColor = [];
+$eventIDs = [];
+if (isset($_GET['tree'])) {
+    $query = "SELECT Events.id as 'id', Events.date as 'date', EventLocation.color as 'color' 
+                FROM Events
+                join EventLocation on EventLocation.id = Events.locationID
+                JOIN EventUsers on EventUsers.eventID = Events.id
+                where EventUsers.userID = '$uid'";
+    if ($result = $conn->query($query)) {
+        while ($row = $result->fetch_assoc()) {
+
+            $eventDate[] = date('n, j', strtotime($row['date']));
+            $eventLocationColor[] = $row['color'];
+            $eventIDs[] = $row['id'];
+        }
+    }
+}else {
+    $query = "SELECT Events.id as 'id', Events.date as 'date', EventLocation.color as 'color' FROM Events join EventLocation on EventLocation.id = Events.locationID";
+    if ($result = $conn->query($query)) {
+        while ($row = $result->fetch_assoc()) {
+
+            $eventDate[] = date('n, j', strtotime($row['date']));
+            $eventLocationColor[] = $row['color'];
+            $eventIDs[] = $row['id'];
+        }
+    }
+}
+
 date_default_timezone_set('America/New_York');
 $month = date('n');
 $current_date = date('j');
@@ -26,6 +70,15 @@ $month_end = date('Y-m-t', strtotime($first_of_month));
 $end_of_month = date('w', strtotime($month_end));
 
 $end_of_previous_month = date('t', strtotime('-1 month'));
+
+if (isset($_GET['view'])){
+    echo "<div class='EventView'><a href='/nav/Calendar.php/'>x</a>";
+    echo "<iframe src='/nav/ViewEvent.php/?id=".$_GET['view']."' frameborder='0'></iframe>";
+    echo "</div>";
+}else{
+    echo "";
+}
+
 
 if(isset($_GET['month'])){
     $month = $_GET['month'];
@@ -40,9 +93,19 @@ if(isset($_GET['month'])){
 
     //Unsure why normal logic doesn't work when the iframe is called to move to a new window  but regardless easy fix
     // just set the href to the base folder and file  ##not src since it calls it at index
+    if ($month > 1) {
+        $backArrow = $month - 1;
+    } else {
+        $backArrow = $month;
+    }
+    if ($month < 12) {
+        $forwardArrow = $month + 1;
+    } else {
+        $forwardArrow = $month;
+    }
     echo "<header><table>
             <tr>
-                <td><a><</a></td>
+                <td><a href='/nav/Calendar.php/?month=".$backArrow."'><</a></td>
                 <td class='monthHeader'>
                     <div class='dropdown-container'>
                     <h2><a id='headDate'>".$selected_month."</a></h2>
@@ -62,15 +125,25 @@ if(isset($_GET['month'])){
                         </div>
                     </div>
                 </td>
-                <td><a>></a></td>
+                <td><a href='/nav/Calendar.php/?month=".$forwardArrow."'>></a></td>
             </tr>
 </table></header>";
 }else {
 
     //normal navigation logic to select a month
+    if ($month > 1) {
+        $backArrow = $month - 1;
+    } else {
+        $backArrow = $month;
+    }
+    if ($month < 12) {
+        $forwardArrow = $month + 1;
+    } else {
+        $forwardArrow = $month;
+    }
     echo "<header><table>
             <tr>
-                <td><a><</a></td>
+                <td><a href='/nav/Calendar.php/?month=".$backArrow."'><</a></td>
                 <td class='monthHeader'>
                     <div class='dropdown-container'>
                     <h2><a id='headDate'>" . $selected_month . "</a></h2>
@@ -90,7 +163,7 @@ if(isset($_GET['month'])){
                         </div>
                     </div>
                 </td>
-                <td><a>></a></td>
+                <td><a href='/nav/Calendar.php/?month=".$forwardArrow."'>></a></td>
             </tr>
 </table></header>";
 }
@@ -106,25 +179,26 @@ if ($start_of_month != 0) {
     }
 }
 
-$event = [2,10,11,15,22,22];
-
 for ($i = 1; $i <= $days_in_month; $i++) {
     if ($i == $current_date && $month == $current_month) {
-        if (in_array($i, $event)) {echo "<td class='currentDay'><p class='date'>" . $i . "</p><div class='event-container'>";
-            for ($j = 0; $j < count($event); $j++) {
-                if ($event[$j] == $i) {
-                    echo "<div class='event'></div>";
+        $iDate = $month.', '.$i;
+        if (in_array($iDate, $eventDate)) {
+            echo "<td class='currentDay'><p class='date'>" . $i . "</p><div class='event-container'>";
+            for ($j = 0; $j < count($eventDate); $j++) {
+                if ($eventDate[$j] == $iDate) {
+                    echo "<a class='event' style='background: ".$eventLocationColor[$j]."' href='/nav/Calendar.php/?view=".$eventIDs[$j]."'></a>";
                 }
             }
             echo "</div></td>";
         }else
             echo "<td class='currentDay'><p class='date'>" . $i . "</p></td>";
     } else {
-        if (in_array($i, $event)) {
+        $iDate = $month.', '.$i;
+        if (in_array($iDate, $eventDate)) {
             echo "<td><p class='date'>" . $i . "</p><div class='event-container'>";
-            for ($j = 0; $j < count($event); $j++) {
-                if ($event[$j] == $i) {
-                    echo "<div class='event'></div>";
+            for ($j = 0; $j < count($eventDate); $j++) {
+                if ($eventDate[$j] == $iDate) {
+                    echo "<a class='event' style='background: ".$eventLocationColor[$j]."' href='/nav/Calendar.php/?view=".$eventIDs[$j]."'></a>";
                 }
             }
             echo "</div></td>";
@@ -142,21 +216,64 @@ if ($end_of_month != 6) {
 }
 echo "</tr></table></div>";
 
+//
+// Week View
+//
+
 
 echo "<div id='week' class='hide'><table class='week'><tr>";
 $current_week = date('w');
-if ($current_week > 0) {
-    for ($i = $current_date - $current_week; $i < $current_date; $i++) {
-        echo "<td><p class='date'>$i</p></td>";
-    }
-}
-echo "<td class='currentDay'><p class='date'>" . $current_date . "</p></td>";
 
-if ($current_week != 6) {
+if ($current_week > 0) {
+    if ($current_date-$current_week < 0){
+        for ($k = $current_date - $current_week; $k < 0; $k++) {
+            echo "<td></td>";
+        }
+    }else{
+        for ($k = $current_date - $current_week; $k < $current_date; $k++) {
+            $iDate = $month.', '.$k;
+            if (in_array($iDate, $eventDate)) {
+                echo "<td><p class='date'>" . $k . "</p><div class='event-container'>";
+                for ($j = 0; $j < count($eventDate); $j++) {
+                    if ($eventDate[$j] == $iDate) {
+                        echo "<div class='event' style='background: ".$eventLocationColor[$j]."'></div>";
+                    }
+                }
+                echo "</div></td>";
+            }else{
+                echo "<td><p class='date'>$k</p></td>";
+            }
+        }
+    }
+
+}
+
+$iDate = $month.', '.$current_date;
+if (in_array($iDate, $eventDate)) {
+    echo "<td class='currentDay'><p class='date'>$current_date</p><div class='event-container'>";
+    for ($j = 0; $j < count($eventDate); $j++) {
+        if ($eventDate[$j] == $iDate) {
+            echo "<a class='event' style='background: ".$eventLocationColor[$j]."' href='/nav/Calendar.php/?view=".$eventIDs[$j]."'></a>";
+        }
+    }
+    echo "</div></td>";
+}else{
+    echo "<td class='currentDay'><p class='date'>$current_date</p></td>";
+}
+if ($current_week != 6){
     $exceeded = false;
     for ($i = $current_date + 1; ($current_week+($i - $current_date)) <=6; $i++) {
         if ($i <= $days_in_month) {
-            echo "<td><p class='date'>$i</p></td>";
+            $iDate = $month.', '.$i;
+            if (in_array($iDate, $eventDate)) {
+                echo "<td><p class='date'>$i</p><div class='event-container'>";
+                for ($j = 0; $j < count($eventDate); $j++) {
+                    echo "<a class='event' style='background: ".$eventLocationColor[$j]."' href='/nav/Calendar.php/?view=".$eventIDs[$j]."'></a>";
+                }
+                echo "</div></td>";
+            }else{
+                echo "<td><p class='date'>$i</p></td>";
+            }
         }else{
             $exceeded = true;
             break;
@@ -170,6 +287,7 @@ if ($current_week != 6) {
         }
     }
 }
+
 echo "</tr></table></div>";
 
 ?>

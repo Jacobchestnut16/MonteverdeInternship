@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
         echo "
         <tr>
         <td>
-        <form action='' method=\"post\">
+        <form action='../../action/updateLocation.php' method=\"post\">
             <input type='text' name='eventValue' value='".$row["location"]."' required>
             <input type='color' name='eventColor' value='".$row["color"]."' required>
             <input type='hidden' name='eventID' value='".$row["id"]."' required>

@@ -1,5 +1,5 @@
 <h1>Event List Editor</h1>
-<form action="../../action/addEvent.php">
+<form action="../../action/addEvent.php" method="post">
     <label for="event">Event: </label>
     <input type="text" id="event" name="event" required>
     <button type="submit">Add</button>

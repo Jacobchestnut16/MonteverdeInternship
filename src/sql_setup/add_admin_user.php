@@ -13,18 +13,19 @@ if ($conn->connect_error) {
 $email = $_POST["email"];
 $username = $_POST["username"];
 $password  = $_POST["password"];
+$password = sha1($password);
 $phone = $_POST["phone"];
 $fname = $_POST["firstname"];
 $lname = $_POST["lastname"];
 $privilege = 13;
-$extendedView = 0;
 
-$sql = "INSERT INTO users (username, password, email, phone, firstname, lastname, privilege, extendedView)
-VALUES ($username, $password, $email, $phone, $fname, $lname, $privilege, $extendedView);";
+
+$sql = "INSERT INTO Users (username, password, email, phone, firstname, lastname, privilege)
+VALUES ('$username', '$password', '$email', '$phone', '$fname', '$lname', $privilege);";
 
 if ($conn->query($sql) === TRUE) {
     echo "Admin user created successfully";
-    include '../login.php';
+    include '/login.php';
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

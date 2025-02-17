@@ -12,29 +12,38 @@ if ($conn->connect_error) {
 }
 
 try{
-    $sql = "SELECT * FROM `users` where username = $_POST[username]";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-    if ($result->num_rows <= 0) {
-        echo "Invalid username or password";
-        echo "<br>";
-        echo "<iframe src='../login.html'></iframe>";
-    }
-    $encrypted_password = sha1($_POST["password"]);
-    if ($row['password'] == $encrypted_password) {
-        session_start();
-        $_SESSION['uID'] = $row['uID'];
-        header('Location: index.php/?uid='.$row['uID']);
-        exit();
 
-    }else{
-        echo "Invalid username or password";
-        echo "<br>";
-        echo "<iframe src='../login.html'></iframe>";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        $firstname = $_POST["firstname"];
+        $lastname = $_POST["lastname"];
+        $privilege = 9;
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        $password = sha1($password);
+        $email = $_POST["email"];
+        $phone = $_POST["phone"];
+
+        $sql = "INSERT INTO Users (username, password, email, phone, firstname, lastname, privilege) VALUES ('$username','$password','$email','$phone','$firstname','$lastname',$privilege)";
+        if ($conn->query($sql) === TRUE) {
+            echo "User created successfully. Please log in.";
+        }
     }
+
 }catch (Exception $e){
     echo "Error: " . $e->getMessage();
-    echo "<br>";
-    echo "<iframe src='../login.html'></iframe>";
 }
 
+function generateSignupCode($userId) {
+    // Constants for transformation
+    $multiplier = 7411;  // A large prime number
+    $offset = 82357;     // Another large offset for obfuscation
+
+    // Generate the code using a mathematical transformation
+    $rawCode = ($userId * $multiplier + $offset) % 99999999; // Limit to 8 digits max
+
+    // Pad the code to ensure it's at least 8 digits
+    $signupCode = str_pad($rawCode, 8, "0", STR_PAD_LEFT);
+
+    return $signupCode;
+}

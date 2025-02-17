@@ -105,7 +105,33 @@ a{
 .event{
     margin: 5px;
     background: orange;
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     border-radius: 100%;
+}
+.event a{
+    width: 100%;
+    height: 100%;
+}
+.EventView{
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    z-index: 10;
+    background-color: rgba(50,50,50,.94);
+}
+.EventView a{
+    float: right;
+    font-size: xxx-large;
+    z-index: 20;
+    margin-right: 15px;
+    color: #4dc87f;
+    font-family: "Arial Black";
+}
+.EventView iframe{
+    width: 75%;
+    height: 76%;
+    left: 20px;
+    margin: 5px;
+    overflow: hidden;
 }

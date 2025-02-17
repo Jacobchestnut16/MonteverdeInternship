@@ -14,8 +14,8 @@ $query = "UPDATE EventLocation SET location='".$_POST["eventValue"]."',color='".
 
 if ($conn->query($query) === TRUE) {
     echo "Record updated successfully";
-    include "../nav/admin/Event.php";
+    include "../nav/admin/Location.php";
 } else {
     echo "Error: " . $query . "<br>" . $conn->error;
-    include "../nav/admin/Event.php";
+    include "../nav/admin/Location.php";
 }

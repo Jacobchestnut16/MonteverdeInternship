@@ -15,16 +15,16 @@
 </head>
 <body>
 
-<form action="../action" method="post">
+<form action="/action/register.php" method="post">
     <table>
         <tr>
             <td>
                 <label for="firstname">First name:</label>
-                <input type="text" name="firstname" id="firstname" required onchange="verifyCompletion()" value="<?= $_POST['firstname']; ?>">
+                <input type="text" name="firstname" id="firstname" required onchange="verifyCompletion()" value="<?= $_GET['firstname']; ?>">
             </td>
             <td>
                 <label for="lastname">Last name: </label>
-                <input type="text" name="lastname" id="lastname" required onchange="verifyCompletion()"  value="<?= $_POST['lastname']; ?>">
+                <input type="text" name="lastname" id="lastname" required onchange="verifyCompletion()"  value="<?= $_GET['lastname']; ?>">
             </td>
         </tr>
         <tr>
@@ -55,6 +55,7 @@
         </tr>
         <tr>
             <td>
+                <input type="hidden" name="id" id="id" value="<?= $_GET['id']; ?>">
                 <button id="submit" class="hide" type="submit">Register</button>
             </td>
         </tr>
