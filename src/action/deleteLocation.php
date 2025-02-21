@@ -26,6 +26,7 @@ if (isset($_GET["eventID"])){
 
 if (isset($_POST['eventID'])){
 
+    $query = "UPDATE Events set locationID = null WHERE locationID = '".$_POST['eventID']."'";
     $query = "DELETE FROM EventLocation WHERE id = '".$_POST['eventID']."'";
     if ($conn->query($query) === TRUE) {
         echo "Removed successfully";

@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     echo "Connection failed: " . $conn->connect_error;
 }
 
-$query = "UPDATE UserEventRequest SET approved = -1 where id='" . $_POST['id'] . "'";
+$query = "DELETE FROM UserEventRequest WHERE id=" . $_POST['id'] . ";";
 if ($conn->query($query) === TRUE) {
     echo "Found Request ........ successfully";
 }else{

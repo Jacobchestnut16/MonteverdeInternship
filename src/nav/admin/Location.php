@@ -20,7 +20,13 @@ if ($conn->connect_error) {
     echo "Connection failed: " . $conn->connect_error;
 }
 
-$query = "SELECT * FROM EventLocation";
+//$query = "SELECT * FROM EventLocation";
+$query = "SELECT EventLocation.location as 'location',EventLocation.color as 'color', EventLocation.id,
+       COUNT(Events.locationID) as event_count
+FROM EventLocation left join Events on EventLocation.id = Events.locationID
+group by EventLocation.id, EventLocation.location
+order by event_count DESC";
+
 
 $result = $conn->query($query);
 
@@ -28,6 +34,7 @@ echo "<table>";
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
+
         echo "
         <tr>
         <td>

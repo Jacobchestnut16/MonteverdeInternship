@@ -77,7 +77,7 @@ if ($result->num_rows > 0) {
         </tr>
         <tr>
             <td>
-                <a>Reset Password</a>
+                <a href="/nav/admin/ResetPassword.php">Reset Password</a>
             </td>
         </tr>
         <tr>

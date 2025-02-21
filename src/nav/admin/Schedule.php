@@ -144,7 +144,12 @@ if ($result = $conn->query($query)) {
 }
 
 
-$query = "Select firstname, lastname, id FROM Users order by firstname asc";
+//$query = "Select firstname, lastname, id FROM Users order by firstname asc";
+$query = "Select Users.firstname as 'firstname', Users.lastname as 'lastname', Users.id as 'id',
+            COUNT(EventUsers.userID) as user_count
+            FROM Users left join EventUsers on Users.id = EventUsers.userID
+            group by Users.id, Users.firstname, Users.lastname
+            order by user_count desc, firstname asc";
 
 
 

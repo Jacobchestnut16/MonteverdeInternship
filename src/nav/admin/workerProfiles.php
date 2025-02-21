@@ -45,7 +45,8 @@ function generateSignupCode($userId) {
             $name = $row["firstname"]." ".$row["lastname"];
             $initials = substr($row['firstname'], 0, 1).substr($row['lastname'], 0, 1);
             $privilege = $row["privilege"] == 9 ? "Crew" : ($row["privilege"] == 10 ?
-                "Crew-Management" : ($row["privilege"] == 11 ? "Management": ($row["privilege"] == 12 ? "Domain-Management" : "Domain Admin")));
+                "Crew-Management" : ($row["privilege"] == 11 ? "Management":
+                    ($row["privilege"] == 12 ? "Domain-Management" : "Domain Admin")));
             echo "<div class='card'>
                     <table>
                         <tr class='head'>

@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 session_start();
 $uID = $_SESSION['uid'];
 
-foreach ($_GET['events'] as $id) {
+foreach ($_POST['events'] as $id) {
     echo "<p>Requesting ................... begin</p>";
     $query = "INSERT INTO UserEventRequest (eventID, userID) VALUES ($id, $uID)";
     if ($conn->query($query) === TRUE) {

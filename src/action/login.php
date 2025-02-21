@@ -28,6 +28,23 @@ try{
     $encrypted_password = sha1($_POST["password"]);
     if ($row['password'] == $encrypted_password) {
         $_SESSION['uid'] = $row['id'];
+        $sql = "SELECT * FROM `Users` where id = ".$_SESSION['uid'].";";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $UserPrivilege = $row['privilege'];
+
+        $privileges = [];
+        $query = "SELECT * FROM Permissions WHERE level = ".$UserPrivilege.";";
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $privileges[] = $row['permission'];
+            }
+        }
+
+        $_SESSION['privileges'] = $privileges;
+
+
         header('Location: /');
         exit();
 

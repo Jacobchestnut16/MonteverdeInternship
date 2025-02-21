@@ -168,9 +168,13 @@ if(isset($_GET['month'])){
 </table></header>";
 }
 
-echo "<table>
+echo "<table class='comp'>
 <tr class='weekDays'><td>Sunday</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td>
-</tr></table>";
+</tr></table>
+<table class='phone'>
+<tr class='weekDays'><td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td>
+</tr></table>
+";
 echo "<div id='month' class='show'><table class='days'><tr>";
 if ($start_of_month != 0) {
     $start_of_week = $end_of_previous_month - $start_of_month + 1;

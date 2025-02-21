@@ -135,3 +135,11 @@ a{
     margin: 5px;
     overflow: hidden;
 }
+.phone{
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .phone{display: block}
+    .comp{display: none}
+}

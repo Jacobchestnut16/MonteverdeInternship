@@ -18,20 +18,58 @@ iframe{
     background: rgba(234, 200, 135, 0.71);
     border: none;
 }
-.nav{
+.nav .comp{
     width: 100%;
     background: rgb(142, 109, 11);
 }
-.nav tr{
+.nav .comp tr{
     width: 100%;
 }
-.nav tr td{
-    width: 66px;
+.nav .comp tr td{
+    width: 16%;
     box-shadow: rgba(239, 187, 99, 0.56) 2px 2px 11px;
     padding: 3px;
 }
-.nav tr td div .dropdown tr td{
+.nav .comp tr td div .dropdown tr td{
     width: 150px;
     box-shadow: rgba(211,214,213,.33) 2px 2px 5px;
     padding: 3px;
+}
+.nav .phone {
+    display: none;
+}
+
+@media (max-width: 600px){
+    iframe {
+        height: 558px;
+    }
+    .nav{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    .nav {
+        width: 100%;
+        background: rgb(142, 109, 11);
+
+    }
+    .nav .comp {
+        display: none;
+    }
+    .nav .phone{
+        display: block;
+        width: 100%;
+    }
+    .nav .phone tr{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .nav .phone tr td {
+        padding: 0 12% 5px 12%;
+    }
+    .nav .phone tr td *{
+        font-size: 180%;
+        text-shadow: 3px 3px 10px black;
+    }
 }

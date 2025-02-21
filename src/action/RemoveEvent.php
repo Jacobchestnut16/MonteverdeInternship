@@ -145,6 +145,8 @@ if ($result = $conn->query($query)) {
 </table>
     
     ";
+        $query = "DELETE FROM UserEventRequest WHERE eventID = '".$_POST["id"]."'";
+        $result = $conn->query($query);
         $query = "DELETE FROM EventUsers WHERE eventID = '".$_POST["id"]."'";
         if ($conn->query($query) === TRUE) {
             $query = "DELETE FROM Events WHERE id = " . $_POST["id"];

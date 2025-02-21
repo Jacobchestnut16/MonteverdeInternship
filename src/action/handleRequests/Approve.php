@@ -16,7 +16,7 @@ $query = "INSERT INTO EventUsers (eventID, userID) VALUES ('$eID', '$uID')";
 
 if ($conn->query($query) === TRUE) {
     echo "New record created successfully";
-    $query = "UPDATE UserEventRequest SET approved = 1 where id='" . $_POST['id'] . "'";
+    $query = "DELETE FROM UserEventRequest where id='" . $_POST['id'] . "'";
     if ($conn->query($query) === TRUE) {
         echo "Found Request ........ successfully";
     }else{

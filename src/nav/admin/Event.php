@@ -17,7 +17,11 @@ if ($conn->connect_error) {
     echo "Connection failed: " . $conn->connect_error;
 }
 
-$query = "SELECT * FROM EventType";
+//$query = "SELECT * FROM EventType";
+$query = "SELECT EventType.eventType as 'eventType', EventType.id, COUNT(Events.eventTypeID) as event_count
+FROM EventType left join Events on EventType.id = Events.eventTypeID
+group by EventType.id, EventType.eventType
+order by event_count DESC";
 
 $result = $conn->query($query);
 

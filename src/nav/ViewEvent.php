@@ -1,3 +1,8 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +11,7 @@
     <link rel="stylesheet" href="/static/style/viewEvent.css">
 </head>
 <body>
+
 <?php
 $servername = "database"; //will change after new env setup
 $username = "user";
@@ -29,7 +35,7 @@ $query = "SELECT Events.name as 'name', Events.Date as 'date',
 if ($result = $conn->query($query)) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $name = $row["name"];
+            $name = $row["name"] == null ? $row["location"] : $row["name"];
             $date = date('M,d h:i a',strtotime($row["date"]));
             $notes = $row["notes"];
             $workers = $row["workers"];
@@ -38,6 +44,20 @@ if ($result = $conn->query($query)) {
             $location = $row["location"];
             $color = $row["color"];
         }
+    }
+}
+$requested = false;
+$working = false;
+$query = "SELECT * from UserEventRequest where eventID = " . $_GET["id"] . " and userID = ".$_SESSION["uid"].";";
+if ($result = $conn->query($query)) {
+    if ($result->num_rows > 0) {
+        $requested = true;
+    }
+}
+$query = "SELECT * from EventUsers where eventID = " . $_GET["id"] . " and userID = ".$_SESSION["uid"].";";
+if ($result = $conn->query($query)) {
+    if ($result->num_rows > 0) {
+        $working = true;
     }
 }
 ?>
@@ -92,20 +112,45 @@ if ($result = $conn->query($query)) {
     <tr><td><br></td></tr>
     <tr>
         <td>
-            <form action="/action/RequestEvent.php">
-                <input type="hidden" name="events[]" value="<?= $_GET['id']?>">
-                <button type="submit">Request to work event</button>
-            </form>
+            <?php
+
+            if (!$requested && !$working) {
+                echo "<form action='/action/RequestEvent.php' method='post'>
+                <input type='hidden' name='events[]' value='".$_GET['id']."'>
+            <button type='submit'>Request to work event</button>
+            </form>";
+            }
+            if ($working) {
+                echo "<form action='/action/DropShift.php' method='post'>
+                <input type='hidden' name='events[]' value='".$_GET['id']."'>
+            <button type='submit'>Drop Shift</button>
+            </form>";
+            }
+            ?>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="/nav/admin/EditEvent.php/?id=<?= $_GET['id']?>">Edit Event</a>
+            <?php
+
+            if ($_SESSION['privileges'][6] == 1)
+            echo "
+            <a href='/nav/admin/EditEvent.php/?id=".$_GET['id']."'>Edit Event</a>
+            
+            ";
+            ?>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="/nav/admin/RemoveEvent.php/?id=<?= $_GET['id']?>">DELETE Event</a>
+            <?php
+
+            if ($_SESSION['privileges'][6] == 1 && $_SESSION['privileges'][5] == 1)
+                echo "
+            <a href='/nav/admin/RemoveEvent.php/?id=".$_GET['id']."'>DELETE Event</a>
+            
+            ";
+            ?>
         </td>
     </tr>
 </table>
